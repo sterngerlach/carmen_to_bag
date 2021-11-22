@@ -520,7 +520,7 @@ bool CarmenToBagNode::WriteOldLaser(
 
   // Create sensor_msgs::LaserScan message
   const auto laserScan = this->CreateLaserScanMsg(
-    messageSequence, frameIdLaser, message);
+    messageSequence++, frameIdLaser, message);
   const std::string& topicLaserScan =
     this->mSettings.mTopicOldLaser[message->mSensorId - 3];
   bag.write(topicLaserScan, laserScan.header.stamp, laserScan);
