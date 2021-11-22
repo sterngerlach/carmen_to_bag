@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Usage -->
+<!-- Intel Research Lab (intel.clf) -->
+<!-- roslaunch carmen_to_bag convert.launch \
+     carmen_file_name:=$HOME/slam-benchmarking/intel.clf \
+     bag_file_name:=$(pwd)/intel.bag -->
+
+<!-- ACES Building (aces.clf) -->
+<!-- roslaunch carmen_to_bag convert.launch \
+     carmen_file_name:=$HOME/slam-benchmarking/aces.clf \
+     bag_file_name:=$(pwd)/aces.bag -->
+
+<!-- MIT-CSAIL Building (mit-csail.clf) -->
+<!-- roslaunch carmen_to_bag convert.launch \
+     carmen_file_name:=$HOME/slam-benchmarking/mit-csail.clf \
+     bag_file_name:=$(pwd)/mit-csail.bag -->
+
+<!-- MIT-Killian (mit-killian.clf) -->
+<!-- roslaunch carmen_to_bag convert.launch \
+     carmen_file_name:=$HOME/slam-benchmarking/mit-killian.clf \
+     bag_file_name:=$(pwd)/mit-killian.bag -->
+
+<!-- FR079 (fr079.clf) -->
+<!-- roslaunch carmen_to_bag convert.launch \
+     carmen_file_name:=$HOME/slam-benchmarking/fr079.clf \
+     bag_file_name:=$(pwd)/fr079.bag -->
+
+<!-- FR-clinic (fr-clinic_robotlaser.clf) -->
+<!-- roslaunch carmen_to_bag convert.launch \
+     carmen_file_name:=$HOME/slam-benchmarking/fr-clinic_robotlaser.clf \
+     bag_file_name:=$(pwd)/fr-clinic_robotlaser.bag -->
+
+<!-- Frames -->
+<!-- /laser_odom: Odometry
+     /base_link: Robot
+     /laser: Laser scanner -->
+
+<!-- Topics -->
+<!-- /laser_odom: nav_msgs/Odometry
+     - Odometry (/laser_odom to /base_link frame) -->
+<!-- /scan: sensor_msgs/LaserScan
+     - Scan (/laser frame) -->
+<!-- /tf: tf2_msgs/TFMessage
+     - Pose of a laser scanner relative to a robot
+     - /base_link to /laser frame -->
+
+<launch>
+  <arg name="carmen_file_name" />
+  <arg name="bag_file_name" />
+
+  <node pkg="carmen_to_bag" type="carmen_to_bag_node"
+        name="carmen_to_bag_node" output="screen">
+    <param name="carmen_file_name" value="$(arg carmen_file_name)" />
+    <param name="bag_file_name" value="$(arg bag_file_name)" />
+
+    <param name="publish_odom" value="false" />
+    <param name="publish_odom_tf" value="false" />
+    <param name="publish_true_pos" value="false" />
+    <param name="publish_true_pos_tf" value="false" />
+    <param name="publish_laser_odom" value="true" />
+    <param name="publish_laser_tf_odom_to_robot" value="false" />
+    <param name="publish_laser_tf_robot_to_laser" value="true" />
+
+    <param name="topic_tf" value="/tf" />
+    <param name="topic_odom" value="/odom" />
+    <param name="topic_true_pos" value="/true_pos" />
+
+    <!-- Intel Research Lab dataset (intel.clf) -->
+    <!-- ACES Building (aces.clf) -->
+    <!-- MIT-CSAIL Building (mit-csail.clf) -->
+    <!-- MIT-Killian (mit-killian.clf) -->
+    <!-- FR079 (fr079.clf) -->
+    <!-- FR-clinic (fr-clinic_robotlaser.clf) -->
+    <param name="topic_laser_odom" value="/laser_odom" />
+
+    <param name="topic_raw_laser_1" value="/raw_laser_1" />
+    <param name="topic_raw_laser_2" value="/raw_laser_2" />
+    <param name="topic_raw_laser_3" value="/raw_laser_3" />
+    <param name="topic_raw_laser_4" value="/raw_laser_4" />
+    <param name="topic_raw_laser_5" value="/raw_laser_5" />
+
+    <!-- <param name="topic_robot_laser_1" value="/robot_laser_1" /> -->
+    <!-- FR-clinic (fr-clinic_robotlaser.clf) -->
+    <param name="topic_robot_laser_1" value="/scan" />
+
+    <param name="topic_robot_laser_2" value="/robot_laser_2" />
+    <param name="topic_robot_laser_3" value="/robot_laser_3" />
+    <param name="topic_robot_laser_4" value="/robot_laser_4" />
+    <param name="topic_robot_laser_5" value="/robot_laser_5" />
+
+    <param name="topic_front_laser" value="/front_laser" />
+    <!-- Intel Research Lab dataset (intel.clf) -->
+    <!-- ACES Building (aces.clf) -->
+    <!-- MIT-CSAIL Building (mit-csail.clf) -->
+    <!-- MIT-Killian (mit-killian.clf) -->
+    <!-- FR079 (fr079.clf) -->
+    <!-- <param name="topic_front_laser" value="/scan" /> -->
+
+    <param name="topic_rear_laser" value="/rear_laser" />
+    <param name="topic_old_laser_3" value="/old_laser_3" />
+    <param name="topic_old_laser_4" value="/old_laser_4" />
+    <param name="topic_old_laser_5" value="/old_laser_5" />
+
+    <param name="frame_id_robot" value="/base_link" />
+    <param name="frame_id_odom" value="/odom" />
+    <param name="frame_id_true_pos" value="/true_pos" />
+
+    <!-- Intel Research Lab dataset (intel.clf) -->
+    <!-- ACES Building (aces.clf) -->
+    <!-- MIT-CSAIL Building (mit-csail.clf) -->
+    <!-- MIT-Killian (mit-killian.clf) -->
+    <!-- FR079 (fr079.clf) -->
+    <!-- FR-clinic (fr-clinic_robotlaser.clf) -->
+    <param name="frame_id_laser_odom" value="/laser_odom" />
+
+    <param name="frame_id_raw_laser_1" value="/raw_laser_1" />
+    <param name="frame_id_raw_laser_2" value="/raw_laser_2" />
+    <param name="frame_id_raw_laser_3" value="/raw_laser_3" />
+    <param name="frame_id_raw_laser_4" value="/raw_laser_4" />
+    <param name="frame_id_raw_laser_5" value="/raw_laser_5" />
+
+    <!-- <param name="frame_id_robot_laser_1" value="/robot_laser_1" /> -->
+    <!-- FR-clinic (fr-clinic_robotlaser.clf) -->
+    <param name="frame_id_robot_laser_1" value="/laser" />
+
+    <param name="frame_id_robot_laser_2" value="/robot_laser_2" />
+    <param name="frame_id_robot_laser_3" value="/robot_laser_3" />
+    <param name="frame_id_robot_laser_4" value="/robot_laser_4" />
+    <param name="frame_id_robot_laser_5" value="/robot_laser_5" />
+
+    <param name="frame_id_front_laser" value="/front_laser" />
+    <!-- Intel Research Lab dataset (intel.clf) -->
+    <!-- ACES Building (aces.clf) -->
+    <!-- MIT-CSAIL Building (mit-csail.clf) -->
+    <!-- MIT-Killian (mit-killian.clf) -->
+    <!-- FR079 (fr079.clf) -->
+    <!-- <param name="frame_id_front_laser" value="/laser" /> -->
+
+    <param name="frame_id_rear_laser" value="/rear_laser" />
+    <param name="frame_id_old_laser_3" value="/old_laser_3" />
+    <param name="frame_id_old_laser_4" value="/old_laser_4" />
+    <param name="frame_id_old_laser_5" value="/old_laser_5" />
+  </node>
+</launch>
